@@ -23,9 +23,11 @@ class DuaNotifier extends StateNotifier<DuaState> {
 
     try {
       final duas = await _duaService.fetchDuas();
+      final categories = duas.map((d) => d.category).toSet().toList();
       state = state.copyWith(
         allDuas: duas,
         filteredDuas: duas, // Initially, filtered list is the same as all
+        categories: categories,
         isLoading: false,
       );
     } catch (e) {

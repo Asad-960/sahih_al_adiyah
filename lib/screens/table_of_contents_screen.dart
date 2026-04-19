@@ -16,10 +16,7 @@ class TableOfContentsScreen extends ConsumerWidget {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    final categories = duaState.allDuas
-        .map((dua) => dua.category)
-        .toSet()
-        .toList();
+    final categories = duaState.categories;
 
     return Scaffold(
       body: CustomScrollView(
