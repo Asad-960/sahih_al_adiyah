@@ -62,7 +62,10 @@ class _SectionDuaListScreenState extends ConsumerState<SectionDuaListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.categoryName, style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          widget.categoryName,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         centerTitle: true,
@@ -73,10 +76,8 @@ class _SectionDuaListScreenState extends ConsumerState<SectionDuaListScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DuaDetailScreen(
-                      duas: sectionDuas,
-                      initialIndex: 0,
-                    ),
+                    builder: (context) =>
+                        DuaDetailScreen(duas: sectionDuas, initialIndex: 0),
                   ),
                 );
               },
@@ -97,86 +98,112 @@ class _SectionDuaListScreenState extends ConsumerState<SectionDuaListScreen> {
                 Expanded(
                   child: ListView.builder(
                     controller: _scrollController,
-                    padding: const EdgeInsets.only(bottom: 100), // space for FAB and formatting
+                    padding: const EdgeInsets.only(
+                      bottom: 100,
+                    ), // space for FAB and formatting
                     itemExtent: _itemHeight,
                     itemCount: sectionDuas.length,
                     itemBuilder: (context, index) {
                       final dua = sectionDuas[index];
 
                       return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 6.0,
-                        ),
-                        child: Card(
-                          margin: EdgeInsets.zero,
-                          elevation: 0,
-                          color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.4),
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                              vertical: 6.0,
                             ),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(16),
-                            onTap: () {
-                              Navigator.push(
+                            child: Card(
+                              margin: EdgeInsets.zero,
+                              elevation: 0,
+                              color: Theme.of(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => DuaDetailScreen(
-                                    duas: sectionDuas,
-                                    initialIndex: index,
+                              ).colorScheme.surfaceVariant.withOpacity(0.4),
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.outlineVariant.withOpacity(0.5),
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(16),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DuaDetailScreen(
+                                        duas: sectionDuas,
+                                        initialIndex: index,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0,
+                                    vertical: 12.0,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor: Theme.of(
+                                          context,
+                                        ).colorScheme.primary.withOpacity(0.1),
+                                        foregroundColor: Theme.of(
+                                          context,
+                                        ).colorScheme.primary,
+                                        radius: 20,
+                                        child: Text(
+                                          '${index + 1}',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 16),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              dua.title,
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              dua.arabicText,
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily: 'Amiri',
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.primary,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              textDirection: TextDirection.rtl,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-                              child: Row(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                                    foregroundColor: Theme.of(context).colorScheme.primary,
-                                    radius: 20,
-                                    child: Text(
-                                      '${index + 1}',
-                                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          dua.title,
-                                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          dua.arabicText,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: 'Amiri',
-                                            color: Theme.of(context).colorScheme.primary,
-                                          ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          textDirection: TextDirection.rtl,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
-                          ),
-                        ),
-                      ).animate().fadeIn(delay: (50 * (index % 10)).ms).slideX(begin: 0.05, end: 0);
+                          )
+                          .animate()
+                          .fadeIn(delay: (50 * (index % 10)).ms)
+                          .slideX(begin: 0.05, end: 0);
                     },
                   ),
                 ),
@@ -184,8 +211,16 @@ class _SectionDuaListScreenState extends ConsumerState<SectionDuaListScreen> {
                   Container(
                     width: 30,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.2),
-                      border: Border(left: BorderSide(color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.2))),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surfaceVariant.withOpacity(0.2),
+                      border: Border(
+                        left: BorderSide(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.outlineVariant.withOpacity(0.2),
+                        ),
+                      ),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

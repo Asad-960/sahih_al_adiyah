@@ -42,11 +42,15 @@ class TableOfContentsScreen extends ConsumerWidget {
                   ),
                 ),
                 child: Center(
-                  child: Icon(
-                    Icons.menu_book_rounded,
-                    size: 100,
-                    color: Colors.white.withOpacity(0.2),
-                  ).animate().scale(duration: 800.ms, curve: Curves.easeOutBack),
+                  child:
+                      Icon(
+                        Icons.menu_book_rounded,
+                        size: 100,
+                        color: Colors.white.withOpacity(0.2),
+                      ).animate().scale(
+                        duration: 800.ms,
+                        curve: Curves.easeOutBack,
+                      ),
                 ),
               ),
             ),
@@ -64,7 +68,9 @@ class TableOfContentsScreen extends ConsumerWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                     side: BorderSide(
-                      color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.outlineVariant.withOpacity(0.5),
                     ),
                   ),
                   child: ListTile(
@@ -87,7 +93,10 @@ class TableOfContentsScreen extends ConsumerWidget {
                       'Introduction (المقدمة)',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 16,
+                    ),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -101,7 +110,9 @@ class TableOfContentsScreen extends ConsumerWidget {
               ),
             ),
           SliverPadding(
-            padding: const EdgeInsets.only(bottom: 100), // padding for floating bottom nav
+            padding: const EdgeInsets.only(
+              bottom: 100,
+            ), // padding for floating bottom nav
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
                 final category = categories[index];
@@ -110,48 +121,67 @@ class TableOfContentsScreen extends ConsumerWidget {
                     .length;
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  child: Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      side: BorderSide(
-                        color: Theme.of(context).colorScheme.outlineVariant.withOpacity(0.5),
-                      ),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 12.0,
-                      ),
-                      leading: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondaryContainer,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Icon(
-                          Icons.folder_open_rounded,
-                          color: Theme.of(context).colorScheme.onSecondaryContainer,
-                        ),
-                      ),
-                      title: Text(
-                        category,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text('$duaCount Du\'a(s)'),
-                      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                SectionDuaListScreen(categoryName: category),
-                          ),
-                        );
-                      },
-                    ),
-                  ).animate().fadeIn(delay: (200 + (index * 50)).ms).slideX(begin: 0.1, end: 0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
+                  child:
+                      Card(
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              side: BorderSide(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.outlineVariant.withOpacity(0.5),
+                              ),
+                            ),
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical: 12.0,
+                              ),
+                              leading: Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondaryContainer,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Icon(
+                                  Icons.folder_open_rounded,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSecondaryContainer,
+                                ),
+                              ),
+                              title: Text(
+                                category,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Text('$duaCount Du\'a(s)'),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 16,
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SectionDuaListScreen(
+                                      categoryName: category,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                          .animate()
+                          .fadeIn(delay: (200 + (index * 50)).ms)
+                          .slideX(begin: 0.1, end: 0),
                 );
               }, childCount: categories.length),
             ),

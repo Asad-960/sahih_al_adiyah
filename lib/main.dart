@@ -58,7 +58,7 @@ class _MainBaseScreenState extends State<MainBaseScreen> {
   final List<Widget> _screens = [
     const TableOfContentsScreen(),
     const FavoritesScreen(),
-    const SettingsScreen(), 
+    const SettingsScreen(),
   ];
 
   @override
